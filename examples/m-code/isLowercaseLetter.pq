@@ -15,6 +15,8 @@ let
             Documentation.Name = "isLowercaseLetter",
             Documentation.LongDescription = "Returns true when the input character changes after converting it to uppercase, which indicates it is a lowercase letter.",
             Documentation.Category = "Text",
+            Documentation.Version = "1.00: initial version",
+            Documentation.Author = " Melissa de Korte",
             Documentation.Examples = {
                 [
                     Description = "Lowercase letter",
