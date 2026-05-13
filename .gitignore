@@ -1,0 +1,90 @@
+# -----------------------------
+# Operating system files
+# -----------------------------
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+
+# -----------------------------
+# Office temporary/lock files
+# -----------------------------
+
+~$*.xlsx
+~$*.xlsm
+~$*.xlsb
+~$*.csv
+~$*.pbix
+*.tmp
+*.temp
+
+
+# -----------------------------
+# Power BI / analysis temp files
+# -----------------------------
+
+*.pbit.tmp
+*.pbix.tmp
+*.cache
+.cache/
+
+
+# -----------------------------
+# Local-only notes and drafts
+# Root-only private folders
+# -----------------------------
+
+/_dev/
+/_notes/
+/_private/
+
+
+# -----------------------------
+# Secrets and credentials
+# -----------------------------
+
+.env
+.env.*
+*.key
+*.pem
+*.pfx
+*.p12
+secrets/
+credentials/
+connection-strings.txt
+
+
+# -----------------------------
+# Logs
+# -----------------------------
+
+*.log
+logs/
+
+
+# -----------------------------
+# Editor and IDE settings
+# -----------------------------
+
+.vscode/
+.idea/
+
+
+# -----------------------------
+# Generated/exported output
+# Root-only generated folders
+# -----------------------------
+
+/tmp/
+/temp/
+/output/
+/exports/
+/generated/
