@@ -12,16 +12,14 @@ let
             type nullable text
                 meta [
                     Documentation.FieldCaption = "txt",
-                    Documentation.FieldDescription
-                        = "A text string to scan for n-digit sequences (e.g. ""Sales20250109T12_45.csv""). "
+                    Documentation.FieldDescription = "A text string to scan for n-digit sequences (e.g. ""Sales20250109T12_45.csv""). "
                 ]
         ),
         len as (
             type number
                 meta [
                     Documentation.FieldCaption = "len",
-                    Documentation.FieldDescription
-                        = "The digit sequence length to scan for in a string (e.g. 8). ",
+                    Documentation.FieldDescription = "The digit sequence length to scan for in a string (e.g. 8). ",
                     Documentation.AllowedValues = allowedLen
                 ]
         ),
@@ -29,8 +27,7 @@ let
             type number
                 meta [
                     Documentation.FieldCaption = "Occurrence",
-                    Documentation.FieldDescription
-                        = "Controls which value to return: 
+                    Documentation.FieldDescription = "Controls which value to return: 
 0 – Occurrence.First, the first n-digit match (default)
 1 – Occurrence.Last, the last n-digit match
 2 – Occurrence.All, all n-digit matches as a list",
@@ -40,8 +37,7 @@ let
     ) as any
         meta [
             Documentation.Name = "extractDigitSequence",
-            Documentation.LongDescription
-                = "Returns only n digit sequences from the input string. Defaults to occurrence first.",
+            Documentation.LongDescription = "Returns only n digit sequences from the input string. Defaults to occurrence first.",
             Documentation.Category = "Text",
             Documentation.Version = "1.10: Added a len parameter",
             Documentation.Author = " Melissa de Korte",
