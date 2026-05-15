@@ -54,11 +54,11 @@ melissa-de-korte-youtube-resources/
 ├── README.md
 ├── LICENSE
 ├── videos/
-│   ├── 001-video-title/
-│   │   ├── sample-data/
-│   │   ├── power-query-m/
+│   ├── 0001-video-title/
+│   │   ├── sample-data
+│   │   ├── m-code.pq
 │   │   └── notes.md
-│   └── 002-video-title/
+│   └── 0002-video-title/
 ├── examples/
 │   ├── excel/
 │   ├── power-bi/
