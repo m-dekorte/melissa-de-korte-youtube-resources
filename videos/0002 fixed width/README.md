@@ -2,8 +2,8 @@
 
 A step-by-step guide to building a dynamic fixed-width file parser that detects column boundaries automatically instead of hard-coding positions.
 
-**Video:** [Watch on YouTube](https://www.youtube.com/@melissa_de_korte)  
-**LinkedIn:** [Connect with Melissa](https://www.linkedin.com/in/melissa-de-korte-64585884/)
+- **Video:** [Watch on YouTube](https://youtu.be/I6Ld9Zn9IR4)
+- **LinkedIn:** [Connect with Melissa](https://www.linkedin.com/in/melissa-de-korte-64585884/)
 
 ---
 
@@ -14,7 +14,7 @@ Instead, create building blocks, pieces of code that can easily be reused and ad
 
 ---
 
-## The Solution: Recognition + Detection
+## The Solution
 
 When a text file has no obvious separator, switch to a monospaced font. If columns suddenly line up perfectly, you're dealing with fixed-width data.
 
@@ -282,17 +282,9 @@ in
 
 ---
 
-## Testing Before Production
-
-1. **Import a new export** — Test with a new export to make sure the solution is stable
-2. **Preview filtered rows** — Check what you're removing by inverting the logical expression
-3. **Verify totals** — Sum numeric columns to confirm value conversion is correct and all data is present
-
----
-
 ## Key Takeaway
 
-Fixed-width files follow a pattern: look for somthing such as a divider, to detect boundaries automatically. Once you found the pattern, the parsing becomes straightforward instead of manual. When the format changes, your query adapts to the new structure.
+Fixed-width files follow a pattern: look for something such as a divider, to detect boundaries. Once you've found the pattern, parsing becomes straightforward instead of manual. When the format changes, your query adapts to the new structure automatically.
 
 Think about a modular appraoch, that enables you to quickly deploy mini-solutions (steps/ building blocks) across different projects. 
 
@@ -302,8 +294,8 @@ Think about a modular appraoch, that enables you to quickly deploy mini-solution
 
 - **Sample File:** `00-sampleFixedWidth.txt`
 - **All Three Queries:** `FileLocation`, `RAW_DATA`, `Solution`
-- **Video Tutorial:** [YouTube](https://www.youtube.com/@melissa_de_korte)
 - **Full Step-by-Step Guide:** See sections above
+- **Channel:** [YouTube](https://www.youtube.com/@melissa_de_korte)
 - **Questions?** [Connect on LinkedIn](https://www.linkedin.com/in/melissa-de-korte-64585884/)
 
 Happy parsing!
