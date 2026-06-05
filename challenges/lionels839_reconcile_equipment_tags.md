@@ -101,41 +101,96 @@ The raw data usually contains columns such as:
 ### Function: `fxGetEquipmentTag`
 
 ```m
-(s as text, optional defaultLocation as text) as text =>
-let 
-    words = {"LOCATION", "UNIT", "PUMP", "TYPE", "NUMBER", "SPARE"},
-    wordMap = {1, 2, 3, 3, 4, 5},
-    splitChars = " ,.;:!?",
-    location = defaultLocation ?? "0",
-    input = Text.Upper(Text.Trim(s)),
+let
+    fxGetEquipmentTag =
+    let
+        fnGetEquipmentTag = (s as text, optional defaultLocation as nullable text, optional overwrite as logical) as text =>
+        let 
+            input = Text.Upper(Text.Trim(s)),
+            splitChars = " ,.;:!?",
+            location = defaultLocation ?? "0",
+            choice = overwrite ?? true,
+            wordMap = [LOCATION = "s1", UNIT = "s2", PUMP = "s3", TYPE = "s3", NUMBER = "s4", SPARE = "s5" ],
 
-    getTag = (t) => let
-        a = List.Combine(
-            List.Transform(
-                Splitter.SplitTextByCharacterTransition(each true, {"A".."Z"})(t),
-                each Splitter.SplitTextByCharacterTransition({"A".."Z"}, each true)(_)
-            )
-        ), 
-        b = if List.Count(a) > 2 
-            then Text.PadStart(a{0}, 3, location) & a{1} & Text.PadStart(a{2}, 4, "0") & (a{3}? ?? "")
-            else t
-    in b,
-    extractTag = (t) => let
-        a = List.Select(Text.SplitAny(t, splitChars), each (_ ?? "") <> ""),
-        b = List.RemoveNulls(
-            List.Transform(List.Positions(a), each [
-                pos = List.PositionOf(words, a{_}),
-                out = if pos >= 0 and _ < List.Count(a) - 1 
-                    then {wordMap{pos}, a{_ + 1}}
-                    else null
-                ][out]
-            )
-        ),
-        c = Text.Combine(List.Transform(List.Sort(b, each _{0}),each _{1}), "")
-    in c,
-    result = if Text.Contains(input, " ") then getTag(extractTag(input)) else getTag(input)
-in 
-    result
+            getTag = (t) => let
+                a = List.Combine(
+                    List.Transform(
+                        Splitter.SplitTextByCharacterTransition(each true, {"A".."Z"})(t),
+                        each Splitter.SplitTextByCharacterTransition({"A".."Z"}, each true)(_)
+                    )
+                ),
+                b = if List.Count(a) > 2 
+                    then Text.PadStart(a{0}, 3, location) & a{1} & Text.PadStart(a{2}, 4, "0") & (a{3}? ?? "")
+                    else t
+            in b,
+            extractTag = (t) => let
+                a = List.Select(Text.SplitAny(t, splitChars), each (_ ?? "") <> ""),
+                b = List.Accumulate(
+                    a,
+                    [pending = null, r = [s1 = "", s2 = "", s3 = "", s4 = "", s5 = "" ]],
+                    (x, y) => [
+                        r = if x[pending] = null then x[r] else if choice then
+                            x[r] & Record.FromList({y}, {x[pending]}) else
+                            x[r] & Record.FromList({Record.Field(x[r], x[pending]) & y},{x[pending]}),
+                        pending = Record.FieldOrDefault(wordMap, y, null)
+                    ]
+                ),
+                outcome = Text.Combine(Record.FieldValues(b[r]), "")
+            in outcome,
+            result = if Text.Contains(input, " ") then getTag(extractTag(input)) else getTag(input)
+        in result,
+
+        stringParameter = type text meta [
+            Documentation.FieldCaption = "s",
+            Documentation.FieldDescription = "The source text to convert into a standardized tag. The text may already be a compact tag, or it may contain keywords such as Location, Unit, Pump, Type, Number, and Spare.",
+            Documentation.SampleValues = {"12A34", "Location 12 Unit A Pump 34"}
+        ],
+        defaultLocationParameter = type nullable text meta[
+            Documentation.FieldCaption = "defaultLocation",
+            Documentation.FieldDescription = "Optional padding character used when the location part of the tag is shorter than 3 characters. When omitted, 0 is used.",
+            Documentation.SampleValues = { "0", "9" }
+        ],
+        overwriteParameter = type logical meta[
+            Documentation.FieldCaption = "overwrite",
+            Documentation.FieldDescription = "When true, repeated keyword values overwrite earlier values. When false, repeated values for the same keyword position are concatenated. When omitted, overwrite is used.",
+            Documentation.SampleValues = {true, false}
+        ],
+        addParameterTypes = type function (
+            s as stringParameter,
+            optional defaultLocation as defaultLocationParameter,
+            optional overwrite as overwriteParameter
+        ) as text meta [
+            Documentation.Name = "fxGetEquipmentTag",
+            Documentation.Description = "Converts a text value into a standardized tag by extracting or formatting location, unit, pump/type, number, and spare components.",
+            Documentation.Version = "1.00: Initial Version",
+            Documentation.Author = "Melissa de Korte",
+            Documentation.Examples = {
+                [
+                    Description = "Format a compact tag",
+                    Code = "fxGetEquipmentTag(""11P1"")",
+                    Result = "011P0001"
+                ],
+                [
+                    Description = "Extract a tag from labelled text",
+                    Code = "fxGetEquipmentTag(""the pump P1 of unit 11 is broken"")",
+                    Result = "011P0001"
+                ],
+                [
+                    Description = "Use a different location padding character",
+                    Code = "fxGetEquipmentTag(""11P1"", ""9"")",
+                    Result = "911P0001"
+                ],
+                [
+                    Description = "Concatenate repeated keyword values instead of overwriting them",
+                    Code = "fxGetEquipmentTag(""Location 1 Location 2 the pump P1 of unit 11 is broken"", ""0"", false)",
+                    Result = "1211P0001"
+                ]
+            }
+        ]
+    in
+        Value.ReplaceType(fnGetEquipmentTag, addParameterTypes)
+in
+    fxGetEquipmentTag
 ```
 
 ## Demo Query
@@ -181,20 +236,19 @@ in
 The context-word extraction uses this mapping:
 
 ```m
-words = {"LOCATION", "UNIT", "PUMP", "TYPE", "NUMBER", "SPARE"}
-wordMap = {1, 2, 3, 3, 4, 5}
+wordMap = [LOCATION = "s1", UNIT = "s2", PUMP = "s3", TYPE = "s3", NUMBER = "s4", SPARE = "s5" ]
 ```
 
 This means:
 
-| Word | Sort order | Meaning |
+| Word | Position | Meaning |
 |---|---:|---|
-| `LOCATION` | 1 | Location prefix |
-| `UNIT` | 2 | Unit number |
-| `PUMP` | 3 | Equipment type |
-| `TYPE` | 3 | Equipment type |
-| `NUMBER` | 4 | Equipment number |
-| `SPARE` | 5 | Optional spare suffix |
+| `LOCATION` | s1 | Location prefix |
+| `UNIT` | s2 | Unit number |
+| `PUMP` | s3 | Equipment type |
+| `TYPE` | s3 | Equipment type |
+| `NUMBER` | s4 | Equipment number |
+| `SPARE` | s5 | Optional spare suffix |
 
 For example:
 
@@ -204,12 +258,12 @@ blabla bla the pump P1 of unit 11 is broken
 
 The function extracts:
 
-| Found word | Extracted value | Sort order |
+| Found word | Extracted value | Position |
 |---|---|---:|
-| `PUMP` | `P1` | 3 |
-| `UNIT` | `11` | 2 |
+| `PUMP` | `P1` | s3 |
+| `UNIT` | `11` | s2 |
 
-After sorting by the mapping, the extracted values become:
+After the record field values are mapped, the extracted values become:
 
 ```text
 11P1
@@ -225,6 +279,7 @@ Then `getTag` normalizes this into:
 
 - fxGetEquipmentTag takes a single text input, if needed, input values can be concatenated.
 - The default location is `0`, but another location prefix can be supplied through the optional `defaultLocation` parameter.
+- The default choice is `overwrite` is `true`. To append repeated keyWord values, set the optional `overwrite` parameter to `false`.
 - The solution converts the input to uppercase, trims leading and trailing spaces, before processing.
 - The current split characters are: `" ,.;:!?"`
 - Additional delimiters can be added such as `/`, `-`, `_`, parentheses, or line breaks.
