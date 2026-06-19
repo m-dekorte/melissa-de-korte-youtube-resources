@@ -20,15 +20,19 @@ For example:
 
 | Masked String | Chars | Expected Answer |
 |---|---|---|
-| `Go* is **eat` | `dGr` | `God is Great` |
+| `*ave *u*!` | `HFn` | `Have Fun!` |
 
-The first `*` is replaced by `d`, the second by `G`, and the third by `r`.
+The first `*` is replaced by `H`, the second by `F`, and the third by `n`.
 
 ## Source
 
-Challenge creator: [Meganathan Elumalai on LinkedIn](https://www.linkedin.com/in/meganathan-elumalai-a3449221/)
+Challenge creator: [Excel BI (Vijay Verma) on LinkedIn](https://www.linkedin.com/in/excelbi/)
 
-Challenge file: [Download workbook](https://lnkd.in/grTcP5g6)
+Challenge file: [Download workbook](https://1drv.ms/x/s!Akd5y6ruJhvhv0YU5Pi_XwvFOXSK)
+
+Rerun by: [Meganathan Elumalai on LinkedIn](https://www.linkedin.com/in/meganathan-elumalai-a3449221/)
+
+File: [Download workbook](https://lnkd.in/grTcP5g6)
 
 ## Sample data
 
@@ -95,17 +99,17 @@ This splits the masked text wherever an asterisk appears.
 For example:
 
 ```text
-Go* is **eat
+*ave *u*!
 ```
 
 becomes:
 
 | List item | Value |
 |---:|---|
-| `0` | `Go` |
-| `1` | ` is ` |
-| `2` |  |
-| `3` | `eat` |
+| `0` |  |
+| `1` | `ave ` |
+| `2` | `u` |
+| `3` | `!` |
 
 The empty text item appears because there are two asterisks next to each other.
 
@@ -120,16 +124,16 @@ This converts the replacement characters into a list of individual characters.
 For example:
 
 ```text
-dGr
+HFn
 ```
 
 becomes:
 
 | List item | Value |
 |---:|---|
-| `0` | `d` |
-| `1` | `G` |
-| `2` | `r` |
+| `0` | `H` |
+| `1` | `F` |
+| `2` | `n` |
 
 ---
 
@@ -143,10 +147,10 @@ Using the same example, the two lists are combined like this:
 
 | Pair | Text piece | Replacement character |
 |---:|---|---|
-| `0` | `Go` | `d` |
-| `1` | ` is ` | `G` |
-| `2` |  | `r` |
-| `3` | `eat` | `null` |
+| `0` |  | `H` |
+| `1` | `ave  ` | `F` |
+| `2` |  `u` | `n` |
+| `3` | `!` | `null` |
 
 The final text piece has no replacement character because it comes after the final asterisk.
 
@@ -165,10 +169,10 @@ Each pair is combined into a small text segment:
 
 | Pair | Combined result |
 |---:|---|
-| `0` | `God` |
-| `1` | ` is G` |
-| `2` | `r` |
-| `3` | `eat` |
+| `0` | `H` |
+| `1` | `ave F` |
+| `2` | `un` |
+| `3` | `!` |
 
 ---
 
@@ -179,7 +183,7 @@ Text.Combine(...)
 The outer `Text.Combine` combines all the small text segments into the final answer:
 
 ```text
-God is Great
+Have Fun!
 ```
 
 ---
