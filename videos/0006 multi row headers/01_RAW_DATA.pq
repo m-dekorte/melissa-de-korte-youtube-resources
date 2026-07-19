@@ -1,0 +1,46 @@
+let
+    Source = Table.FromRows(
+        {
+            {null, "Monthly sales export", null, null, null, null, null, "Generated:", #datetime(2026, 7, 1, 8, 15, 0), null, null, null},
+            {"Prepared by:", "Finance Operations", null, null, "Currency:", "USD", null, null, null, null, "Page", 1},
+            {null, null, "Internal use only", null, null, null, null, "Region:", "All", null, null, null},
+            {null, null, null, null, null, null, null, null, null, null, null, null},
+            {null, null, null, null, null, null, null, null, null, null, null, null},
+            {null, null, null, null, null, null, null, "Net", "Unit", "Gross", null, null},
+            {null, null, null, "Item", null, "Order", null, "sales", "cost", "profit", null, null},
+            {null, null, "Customer", "number", "Product", "date", "Quantity", "amount", "amount", "amount", "Status", null},
+            {null, null, "Acme Retail", "ITM-1001", "Wireless Mouse", #date(2026, 6, 1), 12, 299.4, 12, 155.4, "Shipped", null},
+            {null, null, "Contoso Stores", "ITM-1002", "Mechanical Keyboard", #date(2026, 6, 2), 5, 395, 46, 165, "Shipped", null},
+            {null, null, "Fabrikam Office", "ITM-1003", "USB-C Dock", #date(2026, 6, 3), 3, 388.5, 82, 142.5, "Pending", null},
+            {null, null, "Northwind Traders", "ITM-1004", "27-inch Monitor", #date(2026, 6, 4), 2, 498, 171, 156, "Shipped", null},
+            {null, null, "Adventure Works", "ITM-1005", "Noise-Cancelling Headset", #date(2026, 6, 5), 6, 954, 104, 330, "Backorder", null},
+            {null, null, "Tailspin Toys", "ITM-1006", "Laptop Stand", #date(2026, 6, 6), 10, 399.5, 21.5, 184.5, "Shipped", null},
+            {null, null, "Wide World Importers", "ITM-1007", "HD Webcam", #date(2026, 6, 7), 4, 356, 55, 136, "Pending", null},
+            {null, null, "City Power & Light", "ITM-1008", "External SSD 1TB", #date(2026, 6, 8), 7, 833, 77, 294, "Shipped", null},
+            {null, null, "Alpine Ski House", "ITM-1001", "Wireless Mouse", #date(2026, 6, 9), 8, 199.6, 12, 103.6, "Shipped", null},
+            {null, null, "Litware", "ITM-1002", "Mechanical Keyboard", #date(2026, 6, 10), 3, 237, 46, 99, "Cancelled", null},
+            {null, null, "Proseware", "ITM-1003", "USB-C Dock", #date(2026, 6, 11), 1, 129.5, 82, 47.5, "Pending", null},
+            {null, null, "Trey Research", "ITM-1004", "27-inch Monitor", #date(2026, 6, 12), 14, 3486, 171, 1092, "Shipped", null},
+            {null, null, "Woodgrove Bank", "ITM-1005", "Noise-Cancelling Headset", #date(2026, 6, 13), 5, 795, 104, 275, "Shipped", null},
+            {null, null, "Fourth Coffee", "ITM-1006", "Laptop Stand", #date(2026, 6, 14), 9, 359.55, 21.5, 166.05, "Shipped", null},
+            {null, null, "Blue Yonder Airlines", "ITM-1007", "HD Webcam", #date(2026, 6, 15), 2, 178, 55, 68, "Backorder", null},
+            {null, null, "Coho Winery", "ITM-1008", "External SSD 1TB", #date(2026, 6, 16), 6, 714, 77, 252, "Shipped", null},
+            {null, null, "Humongous Insurance", "ITM-1001", "Wireless Mouse", #date(2026, 6, 17), 11, 274.45, 12, 142.45, "Pending", null},
+            {null, null, "Lucerne Publishing", "ITM-1002", "Mechanical Keyboard", #date(2026, 6, 18), 4, 316, 46, 132, "Shipped", null},
+            {null, null, "A. Datum Corp", "ITM-1003", "USB-C Dock", #date(2026, 6, 19), 3, 388.5, 82, 142.5, "Shipped", null},
+            {null, null, "Consolidated Messenger", "ITM-1004", "27-inch Monitor", #date(2026, 6, 20), 7, 1743, 171, 546, "Shipped", null},
+            {null, null, "Graphic Design Institute", "ITM-1005", "Noise-Cancelling Headset", #date(2026, 6, 21), 5, 795, 104, 275, "Pending", null},
+            {null, null, "School of Fine Art", "ITM-1006", "Laptop Stand", #date(2026, 6, 22), 8, 319.6, 21.5, 147.6, "Shipped", null},
+            {null, null, "Wingtip Toys", "ITM-1007", "HD Webcam", #date(2026, 6, 23), 9, 801, 55, 306, "Shipped", null},
+            {null, null, "Margie's Travel", "ITM-1008", "External SSD 1TB", #date(2026, 6, 24), 2, 238, 77, 84, "Backorder", null},
+            {null, null, "Southridge Video", "ITM-1001", "Wireless Mouse", #date(2026, 6, 25), 4, 99.8, 12, 51.8, "Shipped", null},
+            {null, null, "The Phone Company", "ITM-1002", "Mechanical Keyboard", #date(2026, 6, 26), 6, 474, 46, 198, "Pending", null},
+            {null, null, "VanArsdel", "ITM-1003", "USB-C Dock", #date(2026, 6, 27), 3, 388.5, 82, 142.5, "Shipped", null},
+            {null, null, "Nod Publishers", "ITM-1004", "27-inch Monitor", #date(2026, 6, 28), 12, 2988, 171, 936, "Shipped", null},
+            {null, null, "Munson's Pickles", "ITM-1005", "Noise-Cancelling Headset", #date(2026, 6, 29), 7, 1113, 104, 385, "Cancelled", null},
+            {null, null, "Bellows College", "ITM-1006", "Laptop Stand", #date(2026, 6, 30), 5, 199.75, 21.5, 92.25, "Shipped", null}
+        },
+        {"Column1", "Column2", "Column3", "Column4", "Column5", "Column6", "Column7", "Column8", "Column9", "Column10", "Column11", "Column12"}
+    )
+in
+    Source
