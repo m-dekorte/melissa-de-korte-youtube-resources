@@ -1,8 +1,13 @@
 # Safely Promote Multi-Row Headers
 
-## Overview
+A step-by-step guide to create a custom function that promotes headers that span multiple rows.
 
-This function promotes headers that span multiple rows in a table into a single header row.
+- **Video:** [Promote Multi-Row Headers with One Custom Function in Power Query M](https://youtu.be/dYy8E2bJiKs)
+- **LinkedIn:** [Connect with Melissa](https://www.linkedin.com/in/melissa-de-korte-64585884)
+
+---
+
+## Scenario covered
 
 In real-world data, column names sometimes appear across two or more rows. For example, a sales export might arrive with headers spread across three rows:
 
@@ -32,7 +37,7 @@ in
     Transform
 ```
 
-## How to use the solution
+## Walkthrough
 
 The solution is written as a custom function with three parameters:
 
