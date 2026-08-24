@@ -207,8 +207,8 @@ Function.From(
 
 ## Quick Reference
 
-| Approach | Flexible? | Caller syntax |
-|---|---|---|---|
+| Approach | Flexible? | Syntax |
+|---|---|---|
 | Fixed parameters | No | `fx(1, 2)` |
 | Optional parameters | Limited |`fx(1, 2, 3)` |
 | List parameter | Yes | `fx({1, 2, 3})` |
