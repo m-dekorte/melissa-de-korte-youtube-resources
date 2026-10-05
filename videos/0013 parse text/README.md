@@ -67,6 +67,11 @@ Create a new blank query named `fxArrayOfColArrays`. Use this when every cell co
 
 ```powerquery
 let
+    /*
+        Created by: Melissa de Korte
+        Subscribe: https://www.youtube.com/@melissa_de_korte
+        Resource: https://github.com/m-dekorte/melissa-de-korte-youtube-resources/blob/main/videos/0013%20parse%20text/README.md
+    */
     fxArrayOfColArrays = Function.From(
         type function (fieldValue as text) as table, 
         each Table.FromColumns(
@@ -83,6 +88,11 @@ Create a new blank query named `fxArrayOfRowArrays`. Use this when every cell co
 
 ```powerquery
 let
+    /*
+        Created by: Melissa de Korte
+        Subscribe: https://www.youtube.com/@melissa_de_korte
+        Resource: https://github.com/m-dekorte/melissa-de-korte-youtube-resources/blob/main/videos/0013%20parse%20text/README.md
+    */
     fxArrayOfRowArrays = Function.From(
         type function (fieldValue as text) as table, 
         each Table.FromRows(
@@ -99,6 +109,11 @@ Create a new blank query named `fxArrayOfObjects`. Use this when every cell cont
 
 ```powerquery
 let
+    /*
+        Created by: Melissa de Korte
+        Subscribe: https://www.youtube.com/@melissa_de_korte
+        Resource: https://github.com/m-dekorte/melissa-de-korte-youtube-resources/blob/main/videos/0013%20parse%20text/README.md
+    */
     fxArrayOfObjects = Function.From(
         type function (fieldValue as text) as table, 
         each Table.FromRecords(List.Combine(
