@@ -1,8 +1,13 @@
 let
-    isUppercaseLetter = (char as nullable text) as logical => 
+    /*
+        Created by: Melissa de Korte
+        Subscribe: https://www.youtube.com/@melissa_de_korte
+        Resource: https://github.com/m-dekorte/melissa-de-korte-youtube-resources/blob/main/examples/m-code/isUpper.pq
+    */
+    isUpper = (char as nullable text) as logical => 
         if Text.Length(char ?? "") > 1 then error "#(lf,tab)Expected a single character, but the value provided contains " & Text.From(Text.Length(char)) & " characters."
         else Text.Lower(char) <> char,
-    isUppercaseLetterType = type function (
+    isUpperType = type function (
         char as (
             type nullable text
                 meta [
@@ -12,7 +17,7 @@ let
         )
     ) as logical
         meta [
-            Documentation.Name = "isUppercaseLetter",
+            Documentation.Name = "isUpper",
             Documentation.LongDescription = "Returns true when the input character changes after converting it to lowercase, which indicates it is an uppercase letter.",
             Documentation.Category = "Text",
             Documentation.Version = "1.00: initial version",
@@ -20,20 +25,20 @@ let
             Documentation.Examples = {
                 [
                     Description = "Uppercase letter",
-                    Code        = "isUppercaseLetter(""A"")",
+                    Code        = "isUpper(""A"")",
                     Result      = "true"
                 ],
                 [
                     Description = "Lowercase letter",
-                    Code        = "isUppercaseLetter(""a"")",
+                    Code        = "isUpper(""a"")",
                     Result      = "false"
                 ],
                 [
                     Description = "Digit",
-                    Code        = "isUppercaseLetter(""1"")",
+                    Code        = "isUpper(""1"")",
                     Result      = "false"
                 ]
             }
         ]
 in
-    Value.ReplaceType(isUppercaseLetter, isUppercaseLetterType)
+    Value.ReplaceType(isUpper, isUpperType)
