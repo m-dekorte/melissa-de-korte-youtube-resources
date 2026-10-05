@@ -2,7 +2,7 @@ let
     /*
         Created by: Melissa de Korte
         Subscribe: https://www.youtube.com/@melissa_de_korte
-        Resource: https://github.com/m-dekorte/melissa-de-korte-youtube-resources/edit/main/examples/m-code/isLower.pq
+        Resource: https://github.com/m-dekorte/melissa-de-korte-youtube-resources/blob/main/examples/m-code/isLower.pq
     */
     isLower = (char as nullable text) as logical =>
         if Text.Length(char ?? "") > 1 then error "#(lf,tab)Expected a single character, but the value provided contains " & Text.From(Text.Length(char)) & " characters."
