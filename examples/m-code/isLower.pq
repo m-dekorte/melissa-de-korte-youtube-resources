@@ -1,8 +1,13 @@
 let
-    isLowercaseLetter = (char as nullable text) as logical =>
+    /*
+        Created by: Melissa de Korte
+        Subscribe: https://www.youtube.com/@melissa_de_korte
+        Resource: https://github.com/m-dekorte/melissa-de-korte-youtube-resources/edit/main/examples/m-code/isLower.pq
+    */
+    isLower = (char as nullable text) as logical =>
         if Text.Length(char ?? "") > 1 then error "#(lf,tab)Expected a single character, but the value provided contains " & Text.From(Text.Length(char)) & " characters."
         else Text.Upper(char) <> char,
-    isLowercaseLetterType = type function (
+    isLowerType = type function (
         char as (
             type nullable text
                 meta [
@@ -12,7 +17,7 @@ let
         )
     ) as logical
         meta [
-            Documentation.Name = "isLowercaseLetter",
+            Documentation.Name = "isLower",
             Documentation.LongDescription = "Returns true when the input character changes after converting it to uppercase, which indicates it is a lowercase letter.",
             Documentation.Category = "Text",
             Documentation.Version = "1.00: initial version",
@@ -20,20 +25,20 @@ let
             Documentation.Examples = {
                 [
                     Description = "Lowercase letter",
-                    Code        = "isLowercaseLetter(""a"")",
+                    Code        = "isLower(""a"")",
                     Result      = "true"
                 ],
                 [
                     Description = "Uppercase letter",
-                    Code        = "isLowercaseLetter(""A"")",
+                    Code        = "isLower(""A"")",
                     Result      = "false"
                 ],
                 [
                     Description = "Digit",
-                    Code        = "isLowercaseLetter(""1"")",
+                    Code        = "isLower(""1"")",
                     Result      = "false"
                 ]
             }
         ]
 in
-    Value.ReplaceType(isLowercaseLetter, isLowercaseLetterType)
+    Value.ReplaceType(isLower, isLowerType)
