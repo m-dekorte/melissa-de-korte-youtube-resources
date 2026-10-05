@@ -2,7 +2,7 @@ let
     /*
         Created by: Melissa de Korte
         Subscribe: https://www.youtube.com/@melissa_de_korte
-        Resource: https://github.com/m-dekorte/melissa-de-korte-youtube-resources/edit/main/examples/m-code/extractDigitSequence.pq
+        Resource: https://github.com/m-dekorte/melissa-de-korte-youtube-resources/blob/main/examples/m-code/extractDigitSequence.pq
     */
     extractDigitSequence = (txt as nullable text, len as number, optional Occurrence as number) =>
         let
