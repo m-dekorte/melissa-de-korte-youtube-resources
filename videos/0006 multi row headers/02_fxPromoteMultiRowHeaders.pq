@@ -1,4 +1,9 @@
 let
+    /*
+        Created by: Melissa de Korte
+        Subscribe: https://www.youtube.com/@melissa_de_korte
+        Resource: https://github.com/m-dekorte/melissa-de-korte-youtube-resources/blob/main/videos/0006%20multi%20row%20headers/02_fxPromoteMultiRowHeaders.pq
+    */
     fxPromoteMultiRowHeaders =
     let 
         fnPromoteMultiRowHeaders  =(t as table, startRow as number, rowCount as number) as table =>
